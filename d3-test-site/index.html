@@ -4,6 +4,15 @@
         <meta charset="utf-8">
         <title>D3 Page Template</title>
         <script type="text/javascript" src="d3/d3.v3.js"></script>
+        <style type="text/css">
+            div.bar {
+                display: inline-block;
+                width: 20px;
+                height: 75px; /* We'll override height later */
+                background-color: teal;
+                margin-right: 2px;
+            }
+        </style>
     </head>
     <body>
         <script type="text/javascript">
@@ -11,13 +20,21 @@
             d3.csv("data/food.csv", function(data) {
                 console.log(data);
             });
-            var dataset = [ 5, 10, 15, 20, 25 ];
-            d3.select("body").selectAll("p")
+            var dataset = [ 25, 7, 5, 26, 11, 8, 25, 14, 23, 19,
+                14, 11, 22, 29, 11, 13, 12, 17, 18, 10,
+                24, 18, 25, 9, 3];
+            d3.select("body").selectAll("div")
                 .data(dataset)
                 .enter()
-                .append("p")
-                .text(function(d) { return d; });
+                .append("div")
+                .attr("class", "bar")
+                .style("height", function(d) {
+                    var barHeight = d * 5; //Scale up by factor of 5
+                    return barHeight + "px";
+                });
 
 	</script>
+
+    <div></div>
     </body>
 </html>
